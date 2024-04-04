@@ -1,6 +1,6 @@
 
-from flask import request
-from flask_restful import Resource
+from flask import Flask, request, make_response, jsonify
+# from flask_restful import Resource
 from flask_migrate import Migrate 
 from config import app, db, api
 from models import User, Media, Comment

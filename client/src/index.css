@@ -1,7 +1,168 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://cdn.discordapp.com/attachments/1205180495118471229/1225499569962487918/0bZRWELJ.jpg?ex=66215a6a&is=660ee56a&hm=fd1bbc21fa9d488259486e20bff0ea727861e923a1ed9f66c3cb73b7e8c2cd23&');
+  background-size: cover;
+  background-position: center top;
 }
 
+/* Light theme styles */
+.App.light {
+  background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+  color: #333; /* Dark text */
+}
+
+/* Dark theme styles */
+.App.dark {
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+  color: #fff; /* Light text */
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent; /* Transparent background */
+  border-bottom: 1px solid #444;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.Header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.Header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.Header button:hover {
+  color: #ccc;
+}
+
+/* .header-container styles */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent; /* Dark background color */
+  color: black; /* Light text color */
+}
+
+/* .header-title styles */
+.header-title {
+  font-size: 4.5rem; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+}
+
+/* .logo styles */
+.logo {
+  width: 90px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-left: 10px; /* Add some spacing between text and logo */
+}
+
+/* .content-container styles */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the components horizontally */
+  justify-content: space-between; /* Add space between the components */
+  margin-top: 50px; /* Adjust margin as needed */
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the components horizontally */
+  justify-content: center; /* Center the components vertically */
+  margin-top: 50px; /* Adjust margin as needed */
+}
+
+
+.MustangPage {
+  padding: 20px;
+  margin-top: 100px; /* Add margin between header and MustangPage */
+  box-sizing: border-box;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.card {
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.1);
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  padding: 1rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.card p {
+  margin: 0;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Media queries for mobile and desktop layouts */
+@media (max-width: 768px) {
+  .Header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Header h1, .Header button {
+    margin: 10px;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .card img {
+    height: 150px;
+  }
+
+  .card h2 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}

@@ -1,15 +1,20 @@
-import React from "react";
-
+import { useState } from "react"
 
 function Header() {
-  return (
-    <header className="header-container">
-      <h1 className="header-title">
-        Isaac Cotton
-        <img src="" alt="Isaac Photo" className="photo" />
-      </h1>
-    </header>
-  );
+  const [ darkMode, setDarkMode ] = useState(true)
+  
+  const handleModeCLick = () => setDarkMode(!darkMode)
+  const buttonText = darkMode ? "Light Mode" : "Dark Mode"
+
+    return (
+     <header>
+          <h1>
+              <span className="logo">{"//"}</span>
+              Isaac Cotton
+          </h1>
+          <button onClick={(handleModeCLick)}>{ buttonText }</button>
+      </header>
+  )
 }
 
 export default Header;

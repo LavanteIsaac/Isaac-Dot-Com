@@ -1,11 +1,15 @@
 import React from "react";
-// import Photo from "/Photo"
-// import Footage from "/Footage"
-// import LifeStyle from "/LifeStyle"
+import Media from "./Media"
 
 
-function MediaList(){
-
-}
-
-export default MediaList;
+function MediaList() {
+    // return (
+    //   <ul className="medias">
+    //     {medias.map((media) => (
+    //       <Media key={media.id} media={media} />
+    //     ))}
+    //   </ul>
+    // );
+  }
+  
+  export default MediaList;

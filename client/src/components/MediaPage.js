@@ -3,10 +3,12 @@ import NewMediaForm from "./NewMediaForm";
 import MediaList from "./MediaList";
 import Search from "./Search";
 
+
 function MediaPage() {
     const [mediaPages, setMediaPages] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredMediaPages, setFilteredMediaPages] = useState(mediaPages);
+    
 
     useEffect(() => {
         fetch("http://localhost:5555/medias")
@@ -15,7 +17,7 @@ function MediaPage() {
     }, []);
 
     const addMediaPage = (newMediaPage) => {
-        fetch("http://localhost:5555/media", {
+        fetch("http://localhost:5555/medias", {
             method: "POST",
             headers: {"Content-Type": "Application/JSON"},
             body: JSON.stringify(newMediaPage),
@@ -38,7 +40,7 @@ function MediaPage() {
     };
 
     const deleteMediaPage = (mediaPageId) => {
-        fetch(`http://localhost:5555/mustangs/${mediaPageId}`, {
+        fetch(`http://localhost:5555/medias/${mediaPageId}`, {
             method:"DELETE",
         })
         .then((resp) => {
@@ -54,7 +56,7 @@ function MediaPage() {
 
     return (
         <main className="main-container">
-            <NewMediaForm addMediaPage={addMediaPage}/>
+            <NewMediaForm addMedia={addMediaPage}/>
             <br />
             <br />
             <br />

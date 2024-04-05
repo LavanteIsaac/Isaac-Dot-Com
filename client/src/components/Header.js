@@ -1,10 +1,21 @@
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
+
 
 function Header() {
   const [ darkMode, setDarkMode ] = useState(true)
+  const [user, setUser] = useState('')
+
+
+
   
   const handleModeCLick = () => setDarkMode(!darkMode)
   const buttonText = darkMode ? "Light Mode" : "Dark Mode"
+  
+    useEffect(() => {
+    fetch("http://localhost:5555/users") 
+        .then(r => r.json())
+        .then(dbUsers => setUser(dbUsers))
+      }, []);
 
     return (
      <header>
@@ -14,6 +25,7 @@ function Header() {
           </h1>
           <button onClick={(handleModeCLick)}>{ buttonText }</button>
       </header>
+      
   )
 }
 

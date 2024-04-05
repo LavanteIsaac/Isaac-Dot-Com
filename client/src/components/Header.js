@@ -17,6 +17,7 @@ function Header() {
         .then(dbUsers => setUser(dbUsers))
       }, []);
 
+    
     return (
      <header>
           <h1>
@@ -24,6 +25,7 @@ function Header() {
               Isaac Cotton
           </h1>
           <button onClick={(handleModeCLick)}>{ buttonText }</button>
+          
       </header>
       
   )

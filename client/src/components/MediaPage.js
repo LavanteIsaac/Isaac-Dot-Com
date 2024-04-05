@@ -11,13 +11,13 @@ function MediaPage() {
     
 
     useEffect(() => {
-        fetch("http://localhost:5555/medias")
+        fetch("/medias")
         .then((resp) => resp.json())
         .then((data) => setMediaPages(data))
     }, []);
 
     const addMediaPage = (newMediaPage) => {
-        fetch("http://localhost:5555/medias", {
+        fetch("/medias", {
             method: "POST",
             headers: {"Content-Type": "Application/JSON"},
             body: JSON.stringify(newMediaPage),
@@ -40,7 +40,7 @@ function MediaPage() {
     };
 
     const deleteMediaPage = (mediaPageId) => {
-        fetch(`http://localhost:5555/medias/${mediaPageId}`, {
+        fetch(`medias/${mediaPageId}`, {
             method:"DELETE",
         })
         .then((resp) => {

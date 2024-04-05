@@ -12,7 +12,7 @@ function Header() {
   const buttonText = darkMode ? "Light Mode" : "Dark Mode"
   
     useEffect(() => {
-    fetch("http://localhost:5555/users") 
+    fetch("/users") 
         .then(r => r.json())
         .then(dbUsers => setUser(dbUsers))
       }, []);

@@ -10,14 +10,14 @@ body {
 
 /* Light theme styles */
 .App.light {
-  background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
-  color: #333; /* Dark text */
+  background-color: rgba(175, 168, 168, 0.5); /* Transparent white background */
+  color: #440707; /* Dark text */
 }
 
 /* Dark theme styles */
 .App.dark {
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-  color: #fff; /* Light text */
+  background-color: rgba(30, 16, 16, 0.5); /* Transparent black background */
+  color: #950a0a; /* Light text */
 }
 
 .Header {
@@ -26,7 +26,7 @@ body {
   align-items: center;
   padding: 20px;
   background-color: transparent; /* Transparent background */
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #f2eaea;
   position: fixed;
   width: 100%;
   z-index: 10;
@@ -42,7 +42,7 @@ body {
 .Header button {
   background: none;
   border: none;
-  color: #fff;
+  color: #6b0505;
   font-size: 1.2rem;
   cursor: pointer;
   outline: none;
@@ -59,7 +59,7 @@ body {
   align-items: center;
   padding: 20px;
   background-color: transparent; /* Dark background color */
-  color: black; /* Light text color */
+  color: rgb(114, 111, 111); /* Light text color */
 }
 
 /* .header-title styles */
@@ -94,7 +94,7 @@ body {
 }
 
 
-.MustangPage {
+.MediaPage {
   padding: 20px;
   margin-top: 100px; /* Add margin between header and MustangPage */
   box-sizing: border-box;
@@ -110,7 +110,7 @@ body {
 
 .card {
   box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.1);
-  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  background-color: rgba(109, 10, 10, 0.7); /* Semi-transparent white background */
   padding: 1rem;
   text-align: center;
   border-radius: 5px;
@@ -127,7 +127,7 @@ body {
   margin: 0;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
-  color: #000;
+  color: #acb2bd;
 }
 
 .card p {
@@ -164,5 +164,37 @@ body {
 @media (min-width: 768px) {
   .card-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.navbar {
+  overflow: hidden;
+  background-color: #490a0a;
+}
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+.navbar a:hover {
+  background-color: #ddd;
+  color: rgb(185, 172, 172);
+}
+/* Style for the menu button */
+.menu-button {
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  .navbar a:not(:first-child) {display: none;}
+  .navbar a.menu-icon {
+    float: right;
+    display: block;
   }
 }

@@ -1,57 +1,67 @@
 
-from flask import Flask, request, make_response, jsonify
-# from flask_restful import Resource
-from flask_migrate import Migrate 
-from config import app, db
+from flask import request, make_response, session
+from config import app, db, api
 from models import User, Media, Comment
+from flask_restful import Resource
 
 
 
 
 
-@app.route('/users', methods=['GET', 'POST'])
-def all_users():
-    users = User.query.all()
-    users_list = [user.to_dict(rules= ('-medias')) for user in users]
-    if request.method == 'GET':
-       
-        return make_response(users_list)
-   
-    
-    elif request.method == 'POST':
-        data = request.get_json()
-        user = User(
-            username=data['username'],
-        )
-        db.session.add(user)
-        db.session.commit()
+class Users(Resource):
+    def post(self):
+        data = request.json
+        try:
+            user = User(username=data['username'])
+            user.password_hash = data['password']
 
-        response = make_response(
-            jsonify(user.to_dict()),
-            201,
-        )
-    return response
+            db.session.add(user)
+            db.session.commit()
+
+            session['user_id'] = user.id
+            response = make_response(user.to_dict(), 201)
+        except:
+            return make_response({'error': "something went wrong"}, 400)
+
+        return response
+
+api.add_resource(Users, '/users')
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    user = User.query.filter_by(username=data['username']).first()
+    if not user:
+        return make_response({'error': 'invalid username'}, 404)
+
+    if user.authenticate(data['password']):
+        # session['user_id'] = user.id
+        return make_response(user.to_dict(), 200)
+    else:
+        return make_response({'error': 'invalid username or password'}, 401)
 
 
-@app.route('/users/<int:id>', methods=['PATCH', 'DELETE'])
-def user_by_id(id):
-    user = User.query.get(id)
-  
-    if request.method == 'PATCH':
-        params = request.json
-        for attr in params:
-            setattr(user, attr, params[attr])
-
-        db.session.add(user)
-        db.session.commit()
-
+@app.route('/authorized', methods=['GET'])
+def authorized():
+    user_id = session.get('user_id')
+    if user_id:
+        user = User.query.filter_by(id=user_id).first()
         return make_response(user.to_dict())
+    else:
+        return make_response({'error': 'Unauthorized'}, 401)
 
-    elif request.method =='DELETE':
-        db.session.delete(user)
-        db.session.commit()
+@app.route('/logout', methods=['DELETE'])
+def logout():
+    session['user_id'] = None
+    return make_response({}, 204)
 
-        return make_response( ' ', 204) 
+
+@app.before_request
+def check_authorized():
+    if request.endpoint == 'projectbyid' and not session.get('user_id'):
+        return make_response({'error': 'Unauthorized.'}, 401)
+
+
 
 @app.route('/medias', methods=['GET', 'POST'])
 def all_medias():

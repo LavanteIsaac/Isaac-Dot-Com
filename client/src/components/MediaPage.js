@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NewMediaForm from "./NewMediaForm";
 import MediaList from "./MediaList";
-import Comments from "./Comments";
 import Search from "./Search";
 import "../index.css"; 
 
@@ -79,7 +78,6 @@ function MediaPage() {
         <div className="media-list">
           <MediaList mediaPages={filteredMediaPages} deleteMedia={deleteMediaPage} />
         </div>
-        <Comments />
         <button className="dark-mode-toggle" onClick={handleModeClick}>{darkMode ? "Light Mode" : "Dark Mode"}</button>
       </main>
     );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from './Header'
 
 const LogIn = () => {
   const [isNewUser, setIsNewUser] = useState(false);
@@ -58,6 +59,7 @@ const LogIn = () => {
           <p>Don't have an account? <Link to="/create-account">Create one</Link></p>
         )}
       </div>
+      <Header />
     </div>
   );
 };

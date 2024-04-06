@@ -1,113 +1,83 @@
 body {
+  font-family: Arial, sans-serif;
+  color: #000000; /* Default text color */
+}
+
+.dark-mode body {
+  background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
+  color: #ffffff; /* White text color */
+}
+
+/* Header styles */
+header {
+  background-color: #ffffff; /* Bright background color for header */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for header */
+}
+
+header nav ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-image: url('https://media.discordapp.net/attachments/1205180495118471229/1225499569962487918/0bZRWELJ.jpg?ex=66215a6a&is=660ee56a&hm=fd1bbc21fa9d488259486e20bff0ea727861e923a1ed9f66c3cb73b7e8c2cd23&=&format=webp&width=928&height=930');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
-/* Main container */
-.main-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+header nav ul li {
+  display: inline;
+  margin-right: 20px;
 }
 
-/* Dark mode toggle button */
-.dark-mode-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px;
+header nav ul li:last-child {
+  margin-right: 0;
+}
+
+header nav ul li button {
   background-color: transparent;
   border: none;
-  color: #fff;
-  font-size: 16px;
   cursor: pointer;
+  color: #000000;
+  transition: color 0.3s ease;
 }
 
-.dark-mode-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+header nav ul li button:hover {
+  color: #ffcc00; /* Yellow color on hover */
 }
 
-/* Media page container */
-.media-page {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
+/* Background image */
+body {
+  background-image: url('https://media.discordapp.net/attachments/1205180495118471229/1225499569962487918/0bZRWELJ.jpg?ex=66215a6a&is=660ee56a&hm=fd1bbc21fa9d488259486e20bff0ea727861e923a1ed9f66c3cb73b7e8c2cd23&=&format=webp&width=928&height=930');
+  background-size: 60%; /* Resize the background image to 75% */
+  background-repeat: repeat;
+  background-position: center; /* Center the background image */
+}
+
+/* Media page styles */
+.main-content {
   padding: 20px;
-  margin-top: 20px;
 }
 
-/* Media list */
-.media-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 20px;
+/* Dark mode styles for media page */
+.dark-mode .main-content {
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
 }
 
-/* Media card */
+/* Login and logout page styles */
+.login-page,
+.logout-page {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+}
+
+/* Fan mail wall styles */
+.fan-mail-wall {
+  padding: 20px;
+  background-color: #e6f2ff; /* Light blue background color */
+}
+
+/* Media types and cards styles */
+.media-types {
+  /* Define styles for media types */
+}
+
 .media-card {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.media-card img {
-  width: 100%;
-  border-radius: 5px;
-}
-
-/* Search input */
-.search-input {
-  padding: 10px;
-  width: 100%;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-/* Dark mode styles */
-.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-.dark-mode .media-page {
-  background-color: rgba(255, 255, 255, 0.8); /* Adjust as needed */
-}
-
-.dark-mode .media-card {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.dark-mode .search-input {
-  border-color: #ccc; /* Adjust as needed */
-}
-
-/* Light mode styles */
-.light-mode {
-  background-color: #ffffff;
-  color: #333333;
-}
-
-.light-mode .media-page {
-  background-color: rgba(0, 0, 0, 0.8); /* Adjust as needed */
-}
-
-.light-mode .media-card {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.light-mode .search-input {
-  border-color: #007bff; /* Adjust as needed */
+  /* Define styles for media cards */
 }

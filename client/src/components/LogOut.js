@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from './Header'
 
 const LogOut = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +24,7 @@ const LogOut = () => {
         </div>
         <button type="submit">Log In</button>
       </form>
+      <Header />
     </div>
   );
 };

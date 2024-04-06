@@ -1,6 +1,6 @@
 import React from "react";
 
-function Media(){
+function MediaCard(){
 //     const [photo, setPhoto] = useState(true);
 //     // const [footage, setfootage] = useState(true);
 //     // const [lifeStyle, setLifeStyle] = useState(true);
@@ -9,4 +9,4 @@ function Media(){
 
 }
 
-export default Media; 
+export default MediaCard; 

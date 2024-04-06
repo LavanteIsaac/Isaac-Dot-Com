@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-
-function Header() {
-  const [ darkMode, setDarkMode ] = useState(true)
-  const [user, setUser] = useState('')
-
-
-
-  
-  const handleModeCLick = () => setDarkMode(!darkMode)
-  const buttonText = darkMode ? "Light Mode" : "Dark Mode"
-  
-    useEffect(() => {
-    fetch("/users") 
-        .then(r => r.json())
-        .then(dbUsers => setUser(dbUsers))
-      }, []);
-
-    
-    return (
-     <header>
-          <h1>
-              <span className="logo">{"//"}</span>
-              Isaac Cotton
-          </h1>
-          <button onClick={(handleModeCLick)}>{ buttonText }</button>
-          
-      </header>
-      
-  )
-}
+const Header = ({ onToggleDarkMode, onLogout }) => {
+  return (
+    <header>
+      <nav>
+        <ul>
+          <li><button onClick={onToggleDarkMode}>Dark Mode</button></li>
+          <li><button onClick={onLogout}>Logout</button></li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
 export default Header;

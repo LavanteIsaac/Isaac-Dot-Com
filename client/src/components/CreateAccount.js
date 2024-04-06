@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const LogOut = () => {
+const CreateAccount = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic
+    // Handle account creation logic
   };
 
   return (
     <div>
-      <h2>Log In</h2>
+      <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username:</label>
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </div>
         <div>
           <label>Email:</label>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -21,10 +27,10 @@ const LogOut = () => {
           <label>Password:</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit">Create Account</button>
       </form>
     </div>
   );
 };
 
-export default LogOut;
+export default CreateAccount;

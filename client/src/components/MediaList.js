@@ -1,15 +1,9 @@
 import React from "react";
-import Media from "./Media"
+import MediaCard from "./MediaCard"; 
 
+function MediaList(){
 
-function MediaList() {
-    // return (
-    //   <ul className="medias">
-    //     {medias.map((media) => (
-    //       <Media key={media.id} media={media} />
-    //     ))}
-    //   </ul>
-    // );
-  }
   
-  export default MediaList;
+}
+
+export default MediaList;

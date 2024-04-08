@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './Header';
 
 const Wall = () => {
   const [fanMailList, setFanMailList] = useState([]);
@@ -43,6 +44,7 @@ const Wall = () => {
 
   return (
     <div>
+        <Header />
       <h2>Fan Mail Wall</h2>
       <form onSubmit={handleNewFanMailSubmit}>
         <textarea value={newFanMail} onChange={(e) => setNewFanMail(e.target.value)} />

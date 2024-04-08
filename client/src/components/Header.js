@@ -6,10 +6,10 @@ const Header = ({ toggleDarkMode }) => {
     <header>
       <nav>
         <ul>
-          <li><Link to="/media">MediaPage</Link></li>
+          <li><Link to="/app">MediaPage</Link></li>
           <li><Link to="/login">Log In</Link></li>
           <li><Link to="/logout">Log Out</Link></li>
-          <li><Link to="/fan-mail-wall">Fan Mail Wall</Link></li>
+          <li><Link to="/wall">Fan Mail Wall</Link></li>
           <li>
             <button onClick={toggleDarkMode}>
               Dark Mode

@@ -4,6 +4,7 @@ import  { RouterProvider, createBrowserRouter } from  "react-router-dom"
 import App from "./components/App"
 import Login from './components/LogIn';
 import LogOut from "./components/LogOut"
+import Wall from "./components/Wall"
 
 import "./index.css";
 // import reportWebVitals from './reportWebVitals';
@@ -16,6 +17,7 @@ const routes = [
  },
 
 
+
 {
   path: '/App',
   element: <App/>,  
@@ -25,6 +27,11 @@ const routes = [
     path: '/LogOut',
     element: <LogOut/>,  
   },
+
+  {
+    path: '/Wall',
+    element:  < Wall />,
+ },
 
 
 ]

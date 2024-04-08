@@ -1,20 +1,20 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.orm import validates
-from config import db, bcrypt
 
+from config import db, bcrypt
 
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
-
-    serialize_rules = ('-created_at', '-updated_at', '-_password_hash')
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    # Define relationship with comments
+    comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
 
     @property
     def password_hash(self):
@@ -29,14 +29,13 @@ class User(db.Model, SerializerMixin):
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(self.password_hash, password.encode('utf-8'))
-    
+
     def __repr__(self):
-        return f'<User id={self.id} username={self.username} >'
+        return f'<User id={self.id} username={self.username}>'
+
 
 class Media(db.Model, SerializerMixin):
     __tablename__ = 'medias'
-
-    serialize_rules = ('-comments.media',)
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -47,27 +46,25 @@ class Media(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
+    # Define relationship with comments
     comments = db.relationship('Comment', back_populates='media', cascade='all, delete-orphan')
-    users = association_proxy('comments,', 'user')
 
 
 class Comment(db.Model, SerializerMixin):
     __tablename__ = 'comments'
 
-    serialize_rules = ('-media.comments', '-user.comments')
-
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String, unique=True, nullable=False)
-
 
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-  
-    
+    # Define foreign keys
     media_id = db.Column(db.Integer, db.ForeignKey('medias.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-   
-  
+
+    # Define relationship with media
     media = db.relationship('Media', back_populates='comments')
+
+    # Define relationship with user
     user = db.relationship('User', back_populates='comments')

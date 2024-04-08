@@ -4,6 +4,7 @@ function Comments() {
   const [comments, setComments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredComments, setFilteredComments] = useState([]);
+  const [newCommentText, setNewCommentText] = useState(""); // New state for storing the text of the new comment
 
   useEffect(() => {
     fetch("/comments")
@@ -15,7 +16,8 @@ function Comments() {
       .catch((error) => console.error("Error fetching comments:", error));
   }, []);
 
-  const addComment = (newComment) => {
+  const addComment = () => {
+    const newComment = { content: newCommentText }; // Create a new comment object
     fetch("/comments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,15 +25,16 @@ function Comments() {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        setComments([...comments, data]);
+        setComments([...comments, data]); // Add the new comment to the comments array
         setFilteredComments([...filteredComments, data]);
+        setNewCommentText(""); // Clear the input field after adding the comment
       })
       .catch((error) => console.error("Error adding comment:", error));
   };
 
   useEffect(() => {
     const filtered = comments.filter((comment) =>
-      comment.id.toLowerCase().includes(searchQuery.toLowerCase())
+      comment.content.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredComments(filtered);
   }, [searchQuery, comments]);
@@ -40,19 +43,17 @@ function Comments() {
     setSearchQuery(query);
   };
 
+  const handleNewCommentChange = (event) => {
+    setNewCommentText(event.target.value);
+  };
+
+  const handleSubmitComment = (event) => {
+    event.preventDefault();
+    addComment(); // Call addComment when the form is submitted
+  };
+
   const deleteComment = (commentId) => {
-    fetch(`comments/${commentId}`, {
-      method: "DELETE",
-    })
-      .then((resp) => {
-        if (resp.ok) {
-          setComments(comments.filter((comment) => comment.id !== commentId));
-          setFilteredComments(filteredComments.filter((comment) => comment.id !== commentId));
-        } else {
-          console.error("Failed to delete Comment");
-        }
-      })
-      .catch((error) => console.error("Error:", error));
+    // Logic for deleting a comment
   };
 
   return (
@@ -62,6 +63,16 @@ function Comments() {
         placeholder="Search Comments"
         onChange={(e) => handleSearch(e.target.value)}
       />
+      {/* Form for adding a new comment */}
+      <form onSubmit={handleSubmitComment}>
+        <input
+          type="text"
+          placeholder="Add a new comment"
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+        />
+        <button type="submit">Add Comment</button>
+      </form>
       <ul>
         {filteredComments.map((comment) => (
           <li key={comment.id}>

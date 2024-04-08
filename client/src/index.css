@@ -1,16 +1,26 @@
 body {
   font-family: Arial, sans-serif;
-  color: #000000; /* Default text color */
+  color: #ffffff; /* Default text color changed to white */
 }
 
+/* Dark mode */
+/* Dark mode */
 .dark-mode body {
   background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
-  color: #ffffff; /* White text color */
+  color: #ffffff; /* Black text color */
 }
 
+/* Dark mode styles for header */
+.dark-mode header {
+  background-color: #333; /* Dark background color for header in dark mode */
+}
+
+.dark-mode header nav ul li button {
+  color: #fff; /* White text color for buttons in dark mode */
+}
 /* Header styles */
 header {
-  background-color: #ffffff; /* Bright background color for header */
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background for header */
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for header */
 }
@@ -34,7 +44,7 @@ header nav ul li button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #000000;
+  color: #ffffff; /* White text color */
   transition: color 0.3s ease;
 }
 
@@ -44,9 +54,10 @@ header nav ul li button:hover {
 
 /* Background image */
 body {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
   background-image: url('https://media.discordapp.net/attachments/1205180495118471229/1225499569962487918/0bZRWELJ.jpg?ex=66215a6a&is=660ee56a&hm=fd1bbc21fa9d488259486e20bff0ea727861e923a1ed9f66c3cb73b7e8c2cd23&=&format=webp&width=928&height=930');
-  background-size: 60%; /* Resize the background image to 75% */
-  background-repeat: repeat;
+  background-size: 60%; /* Resize the background image to 60% */
+  background-repeat: repeat; /* Allow background image to repeat */
   background-position: center; /* Center the background image */
 }
 
@@ -81,5 +92,3 @@ body {
 .media-card {
   /* Define styles for media cards */
 }
-
-

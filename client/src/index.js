@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from 'react-dom/client';
 import  { RouterProvider, createBrowserRouter } from  "react-router-dom"
 import App from "./components/App"
-import Login from './components/LogIn';
+import LogIn from './components/LogIn';
 import LogOut from "./components/LogOut"
 import Wall from "./components/Wall"
+import Auth from "./components/Auth"
 
 import "./index.css";
 // import reportWebVitals from './reportWebVitals';
@@ -13,15 +14,20 @@ import "./index.css";
 const routes = [
   {
     path: '/LogIn',
-    element:  < Login />,
- },
+    element: <LogIn />,
+ 
+    },
+{
+  path: '/auth',
+  element: <Auth />,
 
-
+},
 
 {
   path: '/App',
   element: <App/>,  
 },
+
 
 {
     path: '/LogOut',
@@ -32,6 +38,7 @@ const routes = [
     path: '/Wall',
     element:  < Wall />,
  },
+
 
 
 ]

@@ -1,19 +1,42 @@
-import React from "react";
-import Comments from "./Comments"
+import React, { useState } from 'react';
 
+const MediaCard = ({ mediaPage }) => {
+  const [comments, setComments] = useState([]);
 
-function MediaCard(){
-//     const [photo, setPhoto] = useState(true);
-//     // const [footage, setfootage] = useState(true);
-//     // const [lifeStyle, setLifeStyle] = useState(true);
+  const handleAddComment = (comment) => {
+    setComments([...comments, comment]);
+  };
 
-return(
+  return (
+    <div className="media-card">
+      <img src={mediaPage.imageUrl} alt={mediaPage.title} />
+      <h4>{mediaPage.title}</h4>
+      <p>{mediaPage.description}</p>
+      
+      {/* Display comments */}
+      <div>
+        <h5>Comments</h5>
+        {comments.map((comment, index) => (
+          <div key={index}>{comment}</div>
+        ))}
+      </div>
 
-    <div>
-        <Comments />
+      {/* Add comment form */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const comment = e.target.elements.comment.value;
+          if (comment.trim() !== '') {
+            handleAddComment(comment);
+            e.target.elements.comment.value = '';
+          }
+        }}
+      >
+        <input type="text" name="comment" placeholder="Add a comment..." />
+        <button type="submit">Submit</button>
+      </form>
     </div>
-);
+  );
+};
 
-}
-
-export default MediaCard; 
+export default MediaCard;

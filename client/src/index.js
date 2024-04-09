@@ -10,13 +10,12 @@ import Auth from "./components/Auth"
 import "./index.css";
 // import reportWebVitals from './reportWebVitals';
 
-
 const routes = [
   {
-    path: '/LogIn',
-    element: <LogIn />,
- 
-    },
+    path: '/login',
+    element:  < LogIn />,
+ },
+
 {
   path: '/auth',
   element: <Auth />,
@@ -24,30 +23,27 @@ const routes = [
 },
 
 {
-  path: '/App',
+  path: '/app',
   element: <App/>,  
 },
 
 
 {
-    path: '/LogOut',
+    path: '/logout',
     element: <LogOut/>,  
-  },
+},
 
-  {
-    path: '/Wall',
-    element:  < Wall />,
- },
-
-
+{
+  path: '/wall',
+  element: <Wall/>,
+}
 
 ]
-
-const router = createBrowserRouter(routes)
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+    
+    const router = createBrowserRouter(routes)
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    );

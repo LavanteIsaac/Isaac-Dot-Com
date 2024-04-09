@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
-import Auth from './Auth';
+
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -31,8 +30,7 @@ const LogIn = () => {
       <div>
         Don't have an account? <Link to="/auth">Create one</Link>
       </div>
-      <Header />
-      <Auth />
+      
     </div>
   );
 };

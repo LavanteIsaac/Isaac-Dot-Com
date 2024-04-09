@@ -2,29 +2,41 @@ from flask import request, make_response, jsonify, session
 from config import app, db, api
 from models import User, Media, Comment, FanMail
 from flask_restful import Resource
+from sqlalchemy_serializer import SerializerMixin  # Assuming SerializerMixin is defined in a separate module
 
-@app.route('/api/fanmail', methods=['POST'])
-def create_fan_mail():
-    content = request.json.get('content', '')
-    if content:
-        fan_mail = FanMail(content=content)
-        db.session.add(fan_mail)
+
+
+# FanMail Resource
+class FanMailResource(Resource):
+    def get(self, id=None):
+        if id:
+            fan_mail = FanMail.query.get_or_404(id)
+            return jsonify(fan_mail.to_dict())
+        else:
+            fan_mail_list = [fan.to_dict() for fan in FanMail.query.all()]
+            return jsonify(fan_mail_list)
+
+    def post(self):
+        content = request.json.get('content', '')
+        if content:
+            fan_mail = FanMail(content=content)
+            db.session.add(fan_mail)
+            db.session.commit()
+            return jsonify(fan_mail.to_dict()), 201
+        else:
+            return jsonify({'error': 'Content is required'}), 400
+
+    def delete(self, id):
+        fan_mail = FanMail.query.get_or_404(id)
+        db.session.delete(fan_mail)
         db.session.commit()
-        return jsonify(fan_mail.to_dict()), 201  # Return dictionary representation
-    return jsonify({'error': ' is required'}), 400
+        return jsonify({'message': 'Fan mail deleted successfully'})
 
-@app.route('/api/fanmail', methods=['GET'])
-def get_all_fan_mail():
-    fan_mail = FanMail.query.all()
-    fan_mail_list = [fan.to_dict() for fan in fan_mail]  # Use 'to_dict()' method
-    return jsonify(fan_mail_list)
+api.add_resource(FanMailResource, '/fanmail', '/fanmail/<int:id>')
 
-@app.route('/api/fanmail/<int:id>', methods=['DELETE'])
-def delete_fan_mail(id):
-    fan_mail = FanMail.query.get_or_404(id)
-    db.session.delete(fan_mail)
-    db.session.commit()
-    return jsonify({'message': 'Fan mail deleted successfully'})
+
+
+# Other endpoints and models (User, Media, Comment) remain unchanged
 
 class Users(Resource):
     def get(self):

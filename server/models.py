@@ -1,6 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from config import db, bcrypt
+from sqlalchemy.orm import relationship
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -69,7 +70,7 @@ class Comment(db.Model, SerializerMixin):
     # Define relationship with user
     user = db.relationship('User', back_populates='comments')
 
-class FanMail(db.Model):
+class FanMail(db.Model, SerializerMixin):
     __tablename__ = 'fan_mail'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -78,7 +79,8 @@ class FanMail(db.Model):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # Adjusted foreign key reference
 
-    user = db.relationship('User', backref='fanmails')  # Define relationship with User model
+    # Define relationship with User model
+    user = relationship('User', backref='fanmails')
 
     def __repr__(self):
         return f'<FanMail {self.id}>'

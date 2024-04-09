@@ -10,6 +10,7 @@ function MediaPage() {
   const [filteredMediaPages, setFilteredMediaPages] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const [user, setUser] = useState('');
+  const [error, setError] = useState(null);
 
   // Function to toggle dark mode
   const handleModeClick = () => {
@@ -18,19 +19,29 @@ function MediaPage() {
 
   useEffect(() => {
     fetch("/users")
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) {
+          throw new Error('Failed to fetch users');
+        }
+        return r.json();
+      })
       .then(dbUsers => setUser(dbUsers))
-      .catch(error => console.error("Error fetching users:", error));
+      .catch(error => setError(error.message));
   }, []);
 
   useEffect(() => {
     fetch("/medias")
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error('Failed to fetch media');
+        }
+        return resp.json();
+      })
       .then((data) => {
         setMediaPages(data);
         setFilteredMediaPages(data); // Initialize filteredMediaPages with data
       })
-      .catch(error => console.error("Error fetching media:", error));
+      .catch(error => setError(error.message));
   }, []);
 
   const addMediaPage = (newMediaPage) => {
@@ -39,12 +50,17 @@ function MediaPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newMediaPage),
     })
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error('Failed to add media page');
+        }
+        return resp.json();
+      })
       .then((data) => {
         setMediaPages([...mediaPages, data]);
         setFilteredMediaPages([...filteredMediaPages, data]);
       })
-      .catch(error => console.error("Error adding media page:", error));
+      .catch(error => setError(error.message));
   };
 
   useEffect(() => {
@@ -63,18 +79,18 @@ function MediaPage() {
       method: "DELETE",
     })
       .then((resp) => {
-        if (resp.ok) {
-          setMediaPages(mediaPages.filter((mediaPage) => mediaPage.id !== mediaPageId));
-          setFilteredMediaPages(filteredMediaPages.filter((mediaPage) => mediaPage.id !== mediaPageId));
-        } else {
-          console.error("Failed to delete Media Page");
+        if (!resp.ok) {
+          throw new Error('Failed to delete media page');
         }
+        setMediaPages(mediaPages.filter((mediaPage) => mediaPage.id !== mediaPageId));
+        setFilteredMediaPages(filteredMediaPages.filter((mediaPage) => mediaPage.id !== mediaPageId));
       })
-      .catch(error => console.error("Error deleting media page:", error));
+      .catch(error => setError(error.message));
   };
 
   return (
     <main className={`main-container ${darkMode ? 'dark-mode' : ''}`}>
+      {error && <div>Error: {error}</div>}
       <h1>Welcome, {user.username}</h1>
       <NewMediaForm addMedia={addMediaPage} />
       <Search onChange={handleSearch} />

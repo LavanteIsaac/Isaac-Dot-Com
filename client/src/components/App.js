@@ -5,7 +5,7 @@ import MediaPage from './MediaPage';
 import LogIn from './LogIn';
 import LogOut from './LogOut';
 import About from './About';
-import Auth from './Auth';
+
 
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -21,7 +21,7 @@ const App = () => {
             <Header exact path="/" component={Header} />
             <MediaPage path="/media" component={MediaPage} />
             <LogIn path="/login" component={LogIn} />
-            <Auth/>
+            
             <LogOut path="/logout" component={LogOut} />
             <About />
         </div>

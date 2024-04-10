@@ -1,21 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios'; // Import Axios for making HTTP requests
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login with entered credentials
-    console.log('Logging in with email and password:', { email, password });
+    
+    try {
+      // Make a POST request to your backend API endpoint for user creation
+      const response = await axios.post('/users', { email, password });
+      console.log('User created:', response.data);
+      
+      // Redirect the user to the appropriate page after successful user creation
+      window.location.href = '/dashboard'; // Replace '/dashboard' with your desired destination
+    } catch (error) {
+      console.error('Error creating user:', error);
+      setError('Error creating user. Please try again later.'); // Set generic error message
+    }
   };
 
   return (
     <div>
       <h2>Welcome to Isaac DOT com</h2>
       <p>Please log in to continue</p>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -30,7 +42,6 @@ const LogIn = () => {
       <div>
         Don't have an account? <Link to="/auth">Create one</Link>
       </div>
-      
     </div>
   );
 };

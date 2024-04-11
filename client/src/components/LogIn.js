@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // Import Axios for making HTTP requests
+import axios from 'axios'; // 
 
 const LogIn = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      // Make a POST request to your backend API endpoint for user creation
-      const response = await axios.post('/users', { email, password });
-      console.log('User created:', response.data);
+      const response = await axios.post('/login', { username, password });
       
-      // Redirect the user to the appropriate page after successful user creation
-      window.location.href = '/dashboard'; // Replace '/dashboard' with your desired destination
+      if (response.status === 200) {
+     
+        window.location.href = '/app';
+      } else {
+        setError('Invalid username or password. Please try again.');
+      }
     } catch (error) {
-      console.error('Error creating user:', error);
-      setError('Error creating user. Please try again later.'); // Set generic error message
+      console.error('Error logging in:', error);
+      setError('Error logging in. Please try again later.');
     }
   };
 
@@ -30,8 +32,8 @@ const LogIn = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label>Username:</label>
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
         <div>
           <label>Password:</label>

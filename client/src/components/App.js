@@ -1,31 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Header from "./Header";
+import MediaPage from "./MediaPage"
 
-import Header from './Header';
-import MediaPage from './MediaPage';
-import LogIn from './LogIn';
-import LogOut from './LogOut';
-import About from './About';
+function App() {
+  const [darkMode, setDarkMode] = useState(false);
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
-const App = () => {
-    const [darkMode, setDarkMode] = useState(false);
+  const logoutUser = () => {
+    // Clear session token from local storage
+    localStorage.removeItem("token");
+    // Redirect to the login page or any other page
+    window.location.href = "/login";
+  };
 
-    const toggleDarkMode = () => {
-      setDarkMode(!darkMode);
-    };
-
-    return (
-        
-            <div className={darkMode ? 'dark-mode' : ''}>
-            <Header toggleDarkMode={toggleDarkMode} />
-            <Header exact path="/" component={Header} />
-            <MediaPage path="/media" component={MediaPage} />
-            <LogIn path="/login" component={LogIn} />
-            
-            <LogOut path="/logout" component={LogOut} />
-            <About />
-        </div>
-    );
+  return (
+    <div className={darkMode ? "dark-mode" : ""}>
+      <Header darkMode={darkMode} onDarkModeToggle={toggleDarkMode} logoutUser={logoutUser} />
+      <MediaPage />
+    </div>
+  );
 }
 
 export default App;

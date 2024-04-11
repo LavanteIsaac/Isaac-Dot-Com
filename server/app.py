@@ -7,15 +7,14 @@ from sqlalchemy_serializer import SerializerMixin  # Assuming SerializerMixin is
 import ipdb 
 
 
-# FanMail Resource
 class FanMailResource(Resource):
     def get(self, id=None):
         if id:
             fan_mail = FanMail.query.get_or_404(id)
-            return jsonify(fan_mail.to_dict())
+            return fan_mail.to_dict(), 200
         else:
             fan_mail_list = [fan.to_dict() for fan in FanMail.query.all()]
-            return jsonify(fan_mail_list)
+            return fan_mail_list, 200
 
     def post(self):
         content = request.json.get('content', '')
@@ -23,15 +22,15 @@ class FanMailResource(Resource):
             fan_mail = FanMail(content=content)
             db.session.add(fan_mail)
             db.session.commit()
-            return jsonify(fan_mail.to_dict()), 201
+            return fan_mail.to_dict(), 201
         else:
-            return jsonify({'error': 'Content is required'}), 400
+            return {'error': 'Content is required'}, 400
 
     def delete(self, id):
         fan_mail = FanMail.query.get_or_404(id)
         db.session.delete(fan_mail)
         db.session.commit()
-        return jsonify({'message': 'Fan mail deleted successfully'})
+        return {'message': 'Fan mail deleted successfully'}, 200
 
 api.add_resource(FanMailResource, '/fanmail', '/fanmail/<int:id>')
 

@@ -4,6 +4,7 @@ from models import User, Media, Comment, FanMail
 from flask_restful import Resource
 from sqlalchemy_serializer import SerializerMixin  # Assuming SerializerMixin is defined in a separate module
 
+import ipdb 
 
 
 # FanMail Resource
@@ -34,59 +35,6 @@ class FanMailResource(Resource):
 
 api.add_resource(FanMailResource, '/fanmail', '/fanmail/<int:id>')
 
-
-
-# Other endpoints and models (User, Media, Comment) remain unchanged
-
-class Users(Resource):
-    def get(self):
-        users = User.query.all()
-        users_list = [user.to_dict() for user in users]
-        return make_response(jsonify(users_list))
-
-    def post(self):
-        data = request.json
-        try:
-            user = User(username=data['username'])
-            user.password_hash = data['password']  # Hash the password
-            db.session.add(user)
-            db.session.commit()
-
-            session['user_id'] = user.id
-            response = make_response(user.to_dict(), 201)
-        except Exception as e:  # Handle specific exceptions
-            return make_response({'error': str(e)}, 400)
-        return response
-
-    def delete(self):
-        session['user_id'] = None
-        return make_response({}, 204)
-
-api.add_resource(Users, '/users')
-
-@app.route('/login', methods=['POST'])
-def login():
-    data = request.json
-    user = User.query.filter_by(username=data['username']).first()
-    if user and user.authenticate(data['password']):
-        session['user_id'] = user.id
-        return make_response(user.to_dict(), 200)
-    else:
-        return make_response({'error': 'Invalid username or password'}, 401)
-
-@app.route('/authorized', methods=['GET'])
-def authorized():
-    user_id = session.get('user_id')
-    if user_id:
-        user = User.query.filter_by(id=user_id).first()
-        if user:
-            return make_response(user.to_dict())
-    return make_response({'error': 'Unauthorized'}, 401)
-
-@app.route('/logout', methods=['DELETE'])
-def logout():
-    session.pop('user_id', None)
-    return make_response({}, 204)
 
 class Medias(Resource):
     def post(self):
@@ -129,6 +77,67 @@ class Comments(Resource):
             return make_response({'error': str(e)}, 400)
 
 api.add_resource(Comments, '/comments')
+
+
+class Users(Resource):
+    def get(self):
+        users = User.query.all()
+        users_list = [user.to_dict() for user in users]
+        return make_response(jsonify(users_list))
+
+    def post(self):
+        data = request.json
+        
+        try:
+            user = User(username=data['username'])
+            user.password_hash = data['password']  # Hash the password
+           
+            db.session.add(user)
+            db.session.commit()
+
+            session['user_id'] = user.id
+            response = make_response(user.to_dict(), 201)
+            return response
+        except Exception as e:  # Handle specific exceptions
+            return make_response({'error': str(e)}, 400)
+        
+
+    def delete(self):
+        session['user_id'] = None
+        return make_response({}, 204)
+
+api.add_resource(Users, '/users')
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    
+
+    user = User.query.filter_by(username=data['username']).first()
+    if user and user.authenticate(data['password']):
+        session['user_id'] = user.id
+        return make_response(user.to_dict(), 200)
+    else:
+        return make_response({'error': 'Invalid username or password'}, 401)
+
+@app.route('/authorized', methods=['GET'])
+def authorized():
+    user_id = session.get('user_id')
+    if user_id:
+        user = User.query.filter_by(id=user_id).first()
+        if user:
+            return make_response(user.to_dict())
+    return make_response({'error': 'Unauthorized'}, 401)
+
+@app.route('/logout', methods=['DELETE'])
+def logout():
+    session.pop('user_id', None)
+    return make_response({}, 204)
+
+@app.before_request
+def check_authorized():
+    if request.endpoint == 'mediabyid' and not session.get('user_id'):
+        return make_response({'error': 'Unauthorized.'}, 401)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NewMediaForm from "./NewMediaForm";
+// import NewMediaForm from "./NewMediaForm";
 import MediaList from "./MediaList";
 import Search from "./Search";
 import "../index.css";
@@ -12,7 +12,7 @@ function MediaPage() {
   const [user, setUser] = useState('');
   const [error, setError] = useState(null);
 
-  // Function to toggle dark mode
+
   const handleModeClick = () => {
     setDarkMode(!darkMode);
   };
@@ -39,33 +39,33 @@ function MediaPage() {
       })
       .then((data) => {
         setMediaPages(data);
-        setFilteredMediaPages(data); // Initialize filteredMediaPages with data
+        setFilteredMediaPages(data); 
       })
       .catch(error => setError(error.message));
   }, []);
 
-  const addMediaPage = (newMediaPage) => {
-    fetch("/medias", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newMediaPage),
-    })
-      .then((resp) => {
-        if (!resp.ok) {
-          throw new Error('Failed to add media page');
-        }
-        return resp.json();
-      })
-      .then((data) => {
-        setMediaPages([...mediaPages, data]);
-        setFilteredMediaPages([...filteredMediaPages, data]);
-      })
-      .catch(error => setError(error.message));
-  };
+  // const addMediaPage = (newMediaPage) => {
+  //   fetch("/medias", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(newMediaPage),
+  //   })
+  //     .then((resp) => {
+  //       if (!resp.ok) {
+  //         throw new Error('Failed to add media page');
+  //       }
+  //       return resp.json();
+  //     })
+  //     .then((data) => {
+  //       setMediaPages([...mediaPages, data]);
+  //       setFilteredMediaPages([...filteredMediaPages, data]);
+  //     })
+  //     .catch(error => setError(error.message));
+  // };
 
   useEffect(() => {
     const filtered = mediaPages.filter((mediaPage) =>
-      mediaPage.type.toLowerCase().includes(searchQuery.toLowerCase())
+     mediaPage.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredMediaPages(filtered);
   }, [searchQuery, mediaPages]);
@@ -87,13 +87,13 @@ function MediaPage() {
       })
       .catch(error => setError(error.message));
   };
-
+ console.log(filteredMediaPages)
   return (
     <main className={`main-container ${darkMode ? 'dark-mode' : ''}`}>
       {error && <div>Error: {error}</div>}
       <h1>Welcome, {user.username}</h1>
-      <NewMediaForm addMedia={addMediaPage} />
-      <Search onChange={handleSearch} />
+      {/* <NewMediaForm addMedia={addMediaPage} /> */}
+      <Search onSubmit={handleSearch} />
       <div className="media-list">
         <MediaList mediaPages={filteredMediaPages} deleteMedia={deleteMediaPage} />
       </div>

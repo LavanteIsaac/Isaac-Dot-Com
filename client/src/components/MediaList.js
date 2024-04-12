@@ -3,9 +3,9 @@ import MediaCard from './MediaCard';
 
 const MediaList = ({ mediaPages }) => {
   // Filter media pages based on their types
-  const photos = mediaPages.filter(mediaPage => mediaPage.type === 'photos');
-  const videos = mediaPages.filter(mediaPage => mediaPage.type === 'videos');
-  const lifestyle = mediaPages.filter(mediaPage => mediaPage.type === 'lifestyle');
+  const photos = mediaPages.filter(mediaPage => mediaPage.category === 'photo');
+  const videos = mediaPages.filter(mediaPage => mediaPage.category === 'video');
+  const lifestyle = mediaPages.filter(mediaPage => mediaPage.category === 'lifestyle');
 
   return (
     <div>

@@ -9,7 +9,7 @@ const MediaCard = ({ mediaPage }) => {
 
   return (
     <div className="media-card">
-      <img src={mediaPage.imageUrl} alt={mediaPage.title} />
+      <img src={mediaPage.url} alt={mediaPage.title} />
       <h4>{mediaPage.title}</h4>
       <p>{mediaPage.description}</p>
       

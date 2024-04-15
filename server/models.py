@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
-    serialize_rules = ('-created_at', '-updated_at', '-_password_hash')
+    serialize_rules = ('-created_at', '-updated_at', '-_password_hash', '-comments.user', '-fanmails.user')
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
@@ -38,6 +38,8 @@ class User(db.Model, SerializerMixin):
 class Media(db.Model, SerializerMixin):
     __tablename__ = 'medias'
 
+    serialize_rules = ("-comments.media", )
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     body = db.Column(db.String)
@@ -53,6 +55,8 @@ class Media(db.Model, SerializerMixin):
 
 class Comment(db.Model, SerializerMixin):
     __tablename__ = 'comments'
+
+    serialize_rules = ("-media.comments", "-user.comments")
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String, unique=True, nullable=False)
@@ -72,6 +76,8 @@ class Comment(db.Model, SerializerMixin):
 
 class FanMail(db.Model, SerializerMixin):
     __tablename__ = 'fan_mail'
+
+    serialize_rules = ("-user.fanmails", )
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)

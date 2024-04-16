@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './Header';
 
-// Define Wall component
+
 const Wall = () => {
-  // State variables
+ 
   const [fanMailList, setFanMailList] = useState([]);
   const [newFanMail, setNewFanMail] = useState('');
   const [editId, setEditId] = useState(null); // State variable to store the ID of the fan mail being edited
@@ -12,30 +12,30 @@ const Wall = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Fetch fan mail on component mount
+  
   useEffect(() => {
     fetchFanMail();
   }, []);
 
-  // Function to fetch fan mail
+  
   const fetchFanMail = () => {
-    setLoading(true); // Set loading state
+    setLoading(true); 
     axios.get('/fanmail')
       .then(response => {
         setFanMailList(response.data);
-        setError(null); // Clear any previous errors
+        setError(null); 
       })
       .catch(error => {
         console.error('Error fetching fan mail:', error);
-        setError('Error fetching fan mail'); // Set error message
+        setError('Error fetching fan mail'); 
       })
-      .finally(() => setLoading(false)); // Clear loading state
+      .finally(() => setLoading(false)); 
   };
 
-  // Function to handle new fan mail submission
+  
   const handleNewFanMailSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading state
+    setLoading(true); 
     axios.post('/fanmail', { content: newFanMail })
       .then(response => {
         setFanMailList([...fanMailList, response.data]);
@@ -46,10 +46,10 @@ const Wall = () => {
         console.error('Error adding fan mail:', error);
         setError('Error adding fan mail'); // Set error message
       })
-      .finally(() => setLoading(false)); // Clear loading state
+      .finally(() => setLoading(false)); 
   };
 
-  // Function to handle fan mail edit submission
+ 
   const handleEditFanMailSubmit = (id) => {
     setLoading(true); // Set loading state
     axios.put(`/fanmail/${id}`, { content: editContent })
@@ -62,34 +62,41 @@ const Wall = () => {
         }));
         setEditId(null);
         setEditContent('');
-        setError(null); // Clear any previous errors
+        setError(null); 
       })
       .catch(error => {
         console.error('Error editing fan mail:', error);
         setError('Error editing fan mail'); // Set error message
       })
-      .finally(() => setLoading(false)); // Clear loading state
+      .finally(() => setLoading(false)); 
   };
 
-  // Function to delete fan mail
+ 
   const deleteFanMail = (id) => {
-    setLoading(true); // Set loading state
+    setLoading(true); 
     axios.delete(`/fanmail/${id}`)
       .then(() => {
         setFanMailList(fanMailList.filter(fanMail => fanMail.id !== id));
-        setError(null); // Clear any previous errors
+        setError(null); 
       })
       .catch(error => {
         console.error('Error deleting fan mail:', error);
-        setError('Error deleting fan mail'); // Set error message
+        setError('Error deleting fan mail'); 
       })
-      .finally(() => setLoading(false)); // Clear loading state
+      .finally(() => setLoading(false)); 
   };
 
-  // Render component
+  const logoutUser = () => {
+   
+    localStorage.removeItem("token");
+  
+    window.location.href = "/login";
+  };
+
+ 
   return (
     <div>
-      <Header />
+      <Header logoutUser={logoutUser} />
       <h2>Fan Mail Wall</h2>
       <form onSubmit={handleNewFanMailSubmit}>
         <textarea
@@ -100,8 +107,8 @@ const Wall = () => {
         />
         <button type="submit">Submit</button>
       </form>
-      {loading && <p>Loading...</p>} {/* Display loading indicator */}
-      {error && <p>{error}</p>} {/* Display error message if present */}
+      {loading && <p>Loading...</p>} 
+      {error && <p>{error}</p>}
       <div>
         {fanMailList.map(fanMail => (
           <div key={fanMail.id}>
@@ -116,7 +123,7 @@ const Wall = () => {
             ) : (
               <div>
                 <p>{fanMail.content}</p>
-                <p>{new Date(fanMail.created_at).toLocaleString()}</p> {/* Format date */}
+                <p>{new Date(fanMail.created_at).toLocaleString()}</p> 
                 <button onClick={() => setEditId(fanMail.id)}>Edit</button>
                 <button onClick={() => deleteFanMail(fanMail.id)}>Delete</button>
               </div>
@@ -129,5 +136,5 @@ const Wall = () => {
   );
 };
 
-// Export Wall component
+
 export default Wall;

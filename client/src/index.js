@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import  { RouterProvider, createBrowserRouter } from  "react-router-dom"
 import App from "./components/App"
 import LogIn from './components/LogIn';
-import LogOut from "./components/LogOut"
+// import LogOut from "./components/LogOut"
 import Wall from "./components/Wall"
 import Auth from "./components/Auth"
 
@@ -13,7 +13,7 @@ import "./index.css";
 const routes = [
   {
     path: '/login',
-    element:  < LogIn />,
+    element:  <LogIn />,
  },
 
 {
@@ -28,10 +28,10 @@ const routes = [
 },
 
 
-{
-    path: '/logout',
-    element: <LogOut/>,  
-},
+// {
+//     path: '/logout',
+//     element: <LogOut/>,  
+// },
 
 {
   path: '/wall',
@@ -47,3 +47,5 @@ const routes = [
         <RouterProvider router={router} />
       </React.StrictMode>
     );
+
+    

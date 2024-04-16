@@ -1,23 +1,13 @@
 body {
   font-family: Arial, sans-serif;
   color: #ffffff; /* Default text color changed to white */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  background-image: url('https://media.discordapp.net/attachments/1205180495118471229/1225499569962487918/0bZRWELJ.jpg?ex=66215a6a&is=660ee56a&hm=fd1bbc21fa9d488259486e20bff0ea727861e923a1ed9f66c3cb73b7e8c2cd23&=&format=webp&width=928&height=930');
+  background-size: 60%; /* Resize the background image to 60% */
+  background-repeat: repeat; /* Allow background image to repeat */
+  background-position: center; /* Center the background image */
 }
 
-/* Dark mode */
-/* Dark mode */
-.dark-mode body {
-  background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
-  color: #ffffff; /* Black text color */
-}
-
-/* Dark mode styles for header */
-.dark-mode header {
-  background-color: #333; /* Dark background color for header in dark mode */
-}
-
-.dark-mode header nav ul li button {
-  color: #fff; /* White text color for buttons in dark mode */
-}
 /* Header styles */
 header {
   background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background for header */
@@ -49,16 +39,21 @@ header nav ul li button {
 }
 
 header nav ul li button:hover {
-  color: #ffcc00; /* Yellow color on hover */
+  color: #141497; /* Yellow color on hover */
 }
 
-/* Background image */
-body {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  background-image: url('https://media.discordapp.net/attachments/1205180495118471229/1225499569962487918/0bZRWELJ.jpg?ex=66215a6a&is=660ee56a&hm=fd1bbc21fa9d488259486e20bff0ea727861e923a1ed9f66c3cb73b7e8c2cd23&=&format=webp&width=928&height=930');
-  background-size: 60%; /* Resize the background image to 60% */
-  background-repeat: repeat; /* Allow background image to repeat */
-  background-position: center; /* Center the background image */
+/* Dark mode styles */
+.dark-mode body {
+  background-color: rgba(0, 0, 0, 0.8); /* Transparent black background */
+  color: #ffffff; /* Black text color */
+}
+
+.dark-mode header {
+  background-color: #000000; /* Dark background color for header in dark mode */
+}
+
+.dark-mode header nav ul li button {
+  color: #fff; /* White text color for buttons in dark mode */
 }
 
 /* Media page styles */
@@ -72,81 +67,146 @@ body {
 .media-item {
   width: calc(50% - 20px); /* Half the width of the container minus padding */
   margin: 10px; /* Adjust margin for spacing between media items */
-  border: 2px solid #ffffff; /* White border around each media item */
-  box-sizing: border-box; /* Include border in width calculation */
 }
 
 /* Media item image styles */
 .media-item img {
-  width: 60%; /* Ensure images fill the entire width of their container */
+  width: 100%; /* Ensure images fill the entire width of their container */
   height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure images fit within the container without being cropped */
 }
 
-/* Media item video styles */
-.media-item video {
-  width: 100%; /* Ensure videos fill the entire width of their container */
+/* Media list styles */
+.media-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: left; 
 }
-
-/* Dark mode styles for media page */
-.dark-mode .main-content {
-  background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
-}
-
-
-/* Login and logout page styles */
-.login-page,
-.logout-page {
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-}
-
-/* Fan mail wall styles */
-.fan-mail-wall {
-  padding: 20px;
-  background-color: #e6f2ff; /* Light blue background color */
-}
-
-/* Media types and cards styles */
-.media-types {
-  /* Define styles for media types */
-}
-
+/* Media card styles */
 .media-card {
-  /* Define styles for media cards */
-}
-
-/* Fan mail wall styles */
-.fan-mail-wall {
-  padding: 20px;
-  background-color: #f8f9fa; /* Light gray background color */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
-  gap: 20px; /* Spacing between grid items */
-}
-
-/* Fan mail styles */
-.fan-mail {
-  border-radius: 10px;
-  background-color: #ffffff; /* White background color for each fan mail */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 5px;
+  background-color: #060606; /* White background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Transparent box shadow */
   overflow: hidden; /* Ensure contents don't overflow */
+  width: 300px; 
+  margin-right: 10px; 
 }
 
-.fan-mail-content {
-  padding: 15px;
+/* Media row styles */
+.media-row {
+  margin-bottom: 0px; /* Add some space between rows */
 }
 
-.fan-mail-content h2 {
-  margin-top: 0;
+/* Media cards container styles */
+.media-cards {
+  display: flex; /* Use flexbox for layout */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 }
 
-.fan-mail-content p {
-  margin-bottom: 0;
+/* Media image styles */
+.media-card img {
+  width: 100%; /* Set width to fill the container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure images cover the entire container */
+  border-radius: 8px; /* Add rounded corners */
 }
 
-.fan-mail-date {
-  font-size: 12px;
-  color: #666666; /* Gray color for the date */
+/* Hover effect */
+.media-card img:hover {
+  transform: scale(1.05); /* Increase the size slightly on hover */
+  transition: transform 0.3s ease; /* Add a smooth transition */
+}
+
+.media-card video {
+  width: 100%; /* Make the video fill the entire width of its container */
+  height: auto; /* Maintain the aspect ratio of the video */
+  border-radius: 8px; /* Add rounded corners to the video */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  outline: none; /* Remove the default focus outline */
+}
+
+
+.media-card-overlay {
+  position: absolute;
+  top: 10;
+  left: 10;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Media card overlay text styles */
+.media-card-overlay-text {
+  color: #ffffff; /* White text color */
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Media card hover effect */
+.media-card:hover .media-card-overlay {
+  opacity: 1;
+}
+
+/* Media card click effect */
+.media-card.clicked .media-card-overlay {
+  opacity: 1;
+}
+
+/* Search bar styles */
+.searchbar {
+  margin-bottom: 0px;
+}
+
+.searchbar form {
+  display: flex;
+  align-items: center;
+}
+
+.searchbar label {
+  margin-right: 10px;
+}
+
+.searchbar input[type="text"] {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+/* Button styles */
+button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Textarea styles */
+textarea {
+  width: 100%;
   padding: 10px;
-  background-color: #f8f9fa; /* Light gray background color for date */
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Loading indicator styles */
+.loading {
+  font-style: italic;
+}
+
+/* Error message styles */
+.error {
+  color: red;
 }

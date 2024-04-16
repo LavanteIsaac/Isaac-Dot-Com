@@ -10,9 +10,9 @@ function App() {
   };
 
   const logoutUser = () => {
-    // Clear session token from local storage
+   
     localStorage.removeItem("token");
-    // Redirect to the login page or any other page
+  
     window.location.href = "/login";
   };
 

@@ -26,6 +26,16 @@ class FanMailResource(Resource):
         else:
             return {'error': 'Content is required'}, 400
 
+    def put(self, id):
+        fan_mail = FanMail.query.get_or_404(id)
+        content = request.json.get('content', '')
+        if content:
+            fan_mail.content = content
+            db.session.commit()
+            return fan_mail.to_dict(), 200
+        else:
+            return {'error': 'Content is required'}, 400
+
     def delete(self, id):
         fan_mail = FanMail.query.get_or_404(id)
         db.session.delete(fan_mail)

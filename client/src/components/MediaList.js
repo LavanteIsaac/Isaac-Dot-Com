@@ -3,13 +3,13 @@ import MediaCard from './MediaCard';
 
 const MediaList = ({ mediaPages }) => {
   // Filter media pages based on their types
-  const photos = mediaPages.filter(mediaPage => mediaPage.category === 'photo');
+  const photos = mediaPages.filter(mediaPage => mediaPage.category === 'portfolio');
   const videos = mediaPages.filter(mediaPage => mediaPage.category === 'video');
   const lifestyle = mediaPages.filter(mediaPage => mediaPage.category === 'lifestyle');
 
   return (
     <div>
-      <h3>Photos</h3>
+      <h3>Portfolio</h3>
       {photos.map(mediaPage => (
         <MediaCard key={mediaPage.id} mediaPage={mediaPage} />
       ))}

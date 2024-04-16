@@ -9,11 +9,19 @@ const MediaCard = ({ mediaPage }) => {
 
   return (
     <div className="media-card">
-      <img src={mediaPage.url} alt={mediaPage.title} />
+      {mediaPage.category === 'video' ? (
+        <video controls>
+          <source src={mediaPage.url} category="video" />
+          Your browser does not support the video tag.
+        </video>
+      ) : (
+        <img src={mediaPage.url} alt={mediaPage.title} />
+      )}
+
       <h4>{mediaPage.title}</h4>
       <p>{mediaPage.description}</p>
-      
-      {/* Display comments */}
+
+   
       <div>
         <h5>Comments</h5>
         {comments.map((comment, index) => (
@@ -21,7 +29,7 @@ const MediaCard = ({ mediaPage }) => {
         ))}
       </div>
 
-      {/* Add comment form */}
+ 
       <form
         onSubmit={(e) => {
           e.preventDefault();

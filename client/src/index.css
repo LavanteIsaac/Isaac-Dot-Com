@@ -64,12 +64,34 @@ body {
 /* Media page styles */
 .main-content {
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Media item styles */
+.media-item {
+  width: calc(50% - 20px); /* Half the width of the container minus padding */
+  margin: 10px; /* Adjust margin for spacing between media items */
+  border: 2px solid #ffffff; /* White border around each media item */
+  box-sizing: border-box; /* Include border in width calculation */
+}
+
+/* Media item image styles */
+.media-item img {
+  width: 60%; /* Ensure images fill the entire width of their container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Media item video styles */
+.media-item video {
+  width: 100%; /* Ensure videos fill the entire width of their container */
 }
 
 /* Dark mode styles for media page */
 .dark-mode .main-content {
   background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
 }
+
 
 /* Login and logout page styles */
 .login-page,
@@ -97,22 +119,34 @@ body {
 .fan-mail-wall {
   padding: 20px;
   background-color: #f8f9fa; /* Light gray background color */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+  gap: 20px; /* Spacing between grid items */
 }
 
+/* Fan mail styles */
 .fan-mail {
-  margin-bottom: 20px;
-  padding: 15px;
   border-radius: 10px;
   background-color: #ffffff; /* White background color for each fan mail */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  overflow: hidden; /* Ensure contents don't overflow */
 }
 
 .fan-mail-content {
-  font-size: 16px;
-  line-height: 1.5;
+  padding: 15px;
+}
+
+.fan-mail-content h2 {
+  margin-top: 0;
+}
+
+.fan-mail-content p {
+  margin-bottom: 0;
 }
 
 .fan-mail-date {
   font-size: 12px;
   color: #666666; /* Gray color for the date */
+  padding: 10px;
+  background-color: #f8f9fa; /* Light gray background color for date */
 }

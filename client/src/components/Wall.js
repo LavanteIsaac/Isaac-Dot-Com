@@ -7,6 +7,8 @@ const Wall = () => {
   // State variables
   const [fanMailList, setFanMailList] = useState([]);
   const [newFanMail, setNewFanMail] = useState('');
+  const [editId, setEditId] = useState(null); // State variable to store the ID of the fan mail being edited
+  const [editContent, setEditContent] = useState(''); // State variable to store the updated content
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -47,6 +49,28 @@ const Wall = () => {
       .finally(() => setLoading(false)); // Clear loading state
   };
 
+  // Function to handle fan mail edit submission
+  const handleEditFanMailSubmit = (id) => {
+    setLoading(true); // Set loading state
+    axios.put(`/fanmail/${id}`, { content: editContent })
+      .then(() => {
+        setFanMailList(fanMailList.map(fanMail => {
+          if (fanMail.id === id) {
+            return { ...fanMail, content: editContent };
+          }
+          return fanMail;
+        }));
+        setEditId(null);
+        setEditContent('');
+        setError(null); // Clear any previous errors
+      })
+      .catch(error => {
+        console.error('Error editing fan mail:', error);
+        setError('Error editing fan mail'); // Set error message
+      })
+      .finally(() => setLoading(false)); // Clear loading state
+  };
+
   // Function to delete fan mail
   const deleteFanMail = (id) => {
     setLoading(true); // Set loading state
@@ -81,9 +105,22 @@ const Wall = () => {
       <div>
         {fanMailList.map(fanMail => (
           <div key={fanMail.id}>
-            <p>{fanMail.content}</p>
-            <p>{new Date(fanMail.created_at).toLocaleString()}</p> {/* Format date */}
-            <button onClick={() => deleteFanMail(fanMail.id)}>Delete</button>
+            {editId === fanMail.id ? (
+              <div>
+                <textarea
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                />
+                <button onClick={() => handleEditFanMailSubmit(fanMail.id)}>Save</button>
+              </div>
+            ) : (
+              <div>
+                <p>{fanMail.content}</p>
+                <p>{new Date(fanMail.created_at).toLocaleString()}</p> {/* Format date */}
+                <button onClick={() => setEditId(fanMail.id)}>Edit</button>
+                <button onClick={() => deleteFanMail(fanMail.id)}>Delete</button>
+              </div>
+            )}
             <hr />
           </div>
         ))}

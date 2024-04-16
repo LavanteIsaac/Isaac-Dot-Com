@@ -53,6 +53,18 @@ def seed_database():
         media33 =Media(category="portfolio", url="https://www.dropbox.com/scl/fi/tu9pgx1ur9ksbc2xowo9d/342885136_2218655444973117_9125636597873904132_n.jpg?rlkey=52h9b4r6xqf86ngffx8h4aech&dl=1")
         media34 =Media(category="portfolio", url="https://www.dropbox.com/scl/fi/1q990g1lqz78x4goxu4ob/342877959_1257806391762955_5571869929382994496_n.jpg?rlkey=n9rvjkebw8wf9m21u9zh8ircp&dl=1")
         media35 =Media(category="portfolio", url="https://www.dropbox.com/scl/fi/5q021p5e4u8x68nd2b9c8/342863127_618046099876342_4375435229163856007_n.jpg?rlkey=xxw5ydvz4y1pardj37n9jfno7&dl=1")
+        media36 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/6hd9fghepb8h7cinkr1fy/Photo-Apr-16-2024-12-56-47-PM-1.jpg?rlkey=2hfwbhm8obfilrmcf96nh9pxt&dl=1")
+        media37 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/905maw6gcg1kr18iyhs6v/Photo-Apr-16-2024-12-56-47-PM-2.jpg?rlkey=xsdk2yqxvfjtzvk6gloai25pd&dl=1")
+        media38 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/00v1vp4312tdxg5zmfd37/Photo-Apr-16-2024-12-56-47-PM-3.jpg?rlkey=hbo7fra4ocuetducndh2u4zxn&dl=1")
+        media39 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/f089yfkexlvrtbi7afbti/Photo-Apr-16-2024-12-56-47-PM.jpg?rlkey=p9a0zh5oqg67lgj6ji3hmu3to&dl=1")
+        media40 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/su197o6eacm7fvnt77z8i/Photo-Jul-11-2023-12-55-29-PM.jpg?rlkey=0sj5teex0lrrzi2a5jm7pi0id&dl=1")
+        media41 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/za36j7okspme5bb0e5ftt/Photo-Jul-18-2023-11-23-45-AM.jpg?rlkey=ss2fagf3ul3s3ghqxktze5ez8&dl=1")
+        media42 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/okl0x55eixqdwlp2667z6/Photo-Jul-25-2022-10-15-34-AM.jpg?rlkey=mdco7tzt71pzfhoixzulyibzn&dl=1")
+        media43 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/0ek2jezofuuu1d7nkyxz9/Photo-May-12-2022-1-07-58-PM.jpg?rlkey=ue5zt0dux3gyff39pmv7nxi66&dl=1")
+        media44 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/4y6s5nxv8d6fhdoqb6iy6/Photo-May-29-2023-6-00-52-PM.jpg?rlkey=bhrk7xmbf68r1omv64zmpw944&dl=1")
+        media45 =Media(category="lifestyle", url="https://www.dropbox.com/scl/fi/tva36g1hx4bpljknsdorf/Photo-Sep-04-2023-8-19-24-PM.jpg?rlkey=dtwwy7abor7x2zga1e8qxkaae&dl=1")
+       
+
 
 
 
@@ -70,6 +82,9 @@ def seed_database():
                             media15, media16, media17, media18, media19, media20, media21,
                             media22, media23, media24, media25, media26, media27, media28,
                             media29, media30, media31, media32, media33, media34, media35,
+                            media36, media37, media38, media39, media40, media41, media42,
+                            media43, media44, media45, 
+
                             ])
         db.session.commit()
 

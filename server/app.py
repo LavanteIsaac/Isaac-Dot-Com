@@ -78,14 +78,39 @@ class Comments(Resource):
     def post(self):
         data = request.json
         try:
-            comment = Comment(description=data['description'])  # Correct the key
+            comment = Comment(content=data['description'])
             db.session.add(comment)
             db.session.commit()
             return make_response(jsonify(comment.to_dict()), 201)
         except Exception as e:
             return make_response({'error': str(e)}, 400)
 
-api.add_resource(Comments, '/comments')
+    def patch(self, comment_id):
+        data = request.json
+        try:
+            comment = Comment.query.get(comment_id)
+            if comment:
+                comment.content = data.get('description', comment.content)
+                db.session.commit()
+                return make_response(jsonify(comment.to_dict()), 200)
+            else:
+                return make_response({'error': 'Comment not found'}, 404)
+        except Exception as e:
+            return make_response({'error': str(e)}, 400)
+
+    def delete(self, comment_id):
+        try:
+            comment = Comment.query.get(comment_id)
+            if comment:
+                db.session.delete(comment)
+                db.session.commit()
+                return make_response(jsonify({'message': 'Comment deleted successfully'}), 200)
+            else:
+                return make_response({'error': 'Comment not found'}, 404)
+        except Exception as e:
+            return make_response({'error': str(e)}, 400)
+
+api.add_resource(Comments, '/comments', '/comments/<int:comment_id>')
 
 
 class Users(Resource):
